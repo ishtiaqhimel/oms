@@ -15,7 +15,6 @@ import (
 // responses:
 //		201: orderResponse
 //	 400: errorResponse
-//   401: errorResponse
 
 func CreateOrder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
@@ -39,8 +38,6 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 //
 // responses:
 //		200: orderListResponse
-//	 400: errorResponse
-//   401: errorResponse
 //	 500: errorResponse
 
 func ListOrders(w http.ResponseWriter, r *http.Request) {
@@ -63,8 +60,6 @@ func ListOrders(w http.ResponseWriter, r *http.Request) {
 //
 // responses:
 //		200: orderResponse
-//	 400: errorResponse
-//   401: errorResponse
 //	 404: errorResponse
 
 func GetOrder(w http.ResponseWriter, r *http.Request) {
@@ -89,7 +84,6 @@ func GetOrder(w http.ResponseWriter, r *http.Request) {
 // responses:
 //		200: orderResponse
 //	 400: errorResponse
-//   401: errorResponse
 //	 404: errorResponse
 
 func UpdateOrder(w http.ResponseWriter, r *http.Request) {
@@ -121,8 +115,6 @@ func UpdateOrder(w http.ResponseWriter, r *http.Request) {
 //
 // responses:
 //		204: noContentResponse
-//	 400: errorResponse
-//   401: errorResponse
 //	 404: errorResponse
 
 func DeleteOrder(w http.ResponseWriter, r *http.Request) {

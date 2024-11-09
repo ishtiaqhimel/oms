@@ -27,11 +27,6 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "oms-server.fullname" . }}
-                  key: DB_PASSWORD
             - name: DB_NAME
               value: {{ .Values.env.dbName }}
             - name: DB_USER
@@ -40,10 +35,10 @@ spec:
               value: {{ .Values.env.dbPort | quote }}
             - name: DB_HOST
               value: {{ .Values.env.dbHost }}
-            - name: JWT_SECRET
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "oms-server.fullname" . }}
-                  key: JWT_SECRET
+                  key: DB_PASSWORD
           ports:
             - containerPort: {{ .Values.service.port }}

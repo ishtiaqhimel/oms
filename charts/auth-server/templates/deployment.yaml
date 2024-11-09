@@ -27,11 +27,6 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "auth-server.fullname" . }}
-                  key: DB_PASSWORD
             - name: DB_NAME
               value: {{ .Values.env.dbName }}
             - name: DB_USER
@@ -40,10 +35,20 @@ spec:
               value: {{ .Values.env.dbPort | quote }}
             - name: DB_HOST
               value: {{ .Values.env.dbHost }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "auth-server.fullname" . }}
+                  key: DB_PASSWORD
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ include "auth-server.fullname" . }}
                   key: JWT_SECRET
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "auth-server.fullname" . }}
+                  key: JWT_KEY
           ports:
             - containerPort: {{ .Values.service.port }}

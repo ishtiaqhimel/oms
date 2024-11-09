@@ -15,7 +15,6 @@ import (
 
 	"github.com/ishtiaqhimel/oms/oms-server/handlers"
 	"github.com/ishtiaqhimel/oms/oms-server/initializers"
-	mw "github.com/ishtiaqhimel/oms/oms-server/middleware"
 )
 
 const defaultPort = "4000"
@@ -24,15 +23,11 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
-	r.Group(func(r chi.Router) {
-		r.Use(mw.AuthMiddleware)
-
-		r.Post("/order", handlers.CreateOrder)
-		r.Get("/order", handlers.ListOrders)
-		r.Get("/order/{id}", handlers.GetOrder)
-		r.Put("/order/{id}", handlers.UpdateOrder)
-		r.Delete("/order/{id}", handlers.DeleteOrder)
-	})
+	r.Post("/order", handlers.CreateOrder)
+	r.Get("/order", handlers.ListOrders)
+	r.Get("/order/{id}", handlers.GetOrder)
+	r.Put("/order/{id}", handlers.UpdateOrder)
+	r.Delete("/order/{id}", handlers.DeleteOrder)
 
 	port := os.Getenv("PORT")
 	if port == "" {

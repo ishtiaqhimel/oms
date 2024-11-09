@@ -6,36 +6,13 @@ Welcome to the OMS (Order Management System) application. In the following secti
 
 - **Auth Server :** Users can signup or login. Users need to signup at first. Then they will get access token each new login.
 - **Order Management System Server :** Simple order CRUD application.
-- **Proxy :** Used `kong` as a public facing piece. All the traffic will be landed here. [Need to deploy on kubernetes cluster using Helm chart to test]
+- **Proxy :** Used `kong` as a public facing piece. All the traffic will be landed here. Then necessary auth termination and other stuffs like getting information from auth, adding authorization header, route check will be done here.
 
 ## Install
 
-You can run the application by cloning this to your local machine or directly from Docker image. Also you can deploy the whole application on Kubernetes cluster using Helm package manager.
+You need a kubernetes cluster having loadbalancer implemneted. If you are using kind then follow [this](https://kind.sigs.k8s.io/docs/user/ingress/). You can deploy the whole application on Kubernetes cluster using Helm package manager.
 
-**Run on Local Machine**
-
-Use `Postgres` as database.
-
-```bash
-$ docker run --name oms-postgres -e POSTGRES_PASSWORD=<password> -d postgres
-```
-
-To build your own image, use the following commands:
-
-```bash
-$ cd ./auth-server # use `cd ./oms-server` to build image for oms-server
-$ export REGISTRY=<your-docker-registry>
-$ export BUILD_PLATFORM=<your-preferred-arch> # ex. linux/amd64
-$ make build
-```
-
-Now run the images providing necessary environment variables. You can find the variables list in `.env.example` file on respective server's directory ([auth-server](./auth-server/) or [oms-server](./oms-server/)).
-
-See [demo](#demo) section to try out.
-
-**Run on Kubernetes Cluster**
-
-You need to clone the repository. Deploy the application using Helm by following command:
+At first, you need to clone the repository. Deploy the application using Helm by following command:
 
 ```bash
 $ cd ./charts
@@ -43,8 +20,6 @@ $ helm install oms ./oms --namespace oms --create-namespace
 ```
 
 To learn more about `oms` chart, see [here](./charts/oms/README.md).
-
-After successfully deploying, you will find an `ingress` object has been created. Here we have defined the rules for the http paths. Using the address in `ingress`, now you can try out the apis. 
 
 See [demo](#demo) section to try out.
 
@@ -65,12 +40,12 @@ $ curl -X POST "http://<address>:<port>/auth/login" \
        -v
 ```
 
-Here, you will get the `Token` in the headers. Copy and save the token.
+Here, you will get the `Bearer Token` in the headers. Copy and save the token.
 
 Now, call the order apis. Let's try list orders api:
 ```bash
 curl -X GET "http://<address>:<port>/api/order" \
-     -H "Token: <token>"
+     -H "Authorization: <bearer-token>"
 ```
 
 Here, you will see the list of orders.

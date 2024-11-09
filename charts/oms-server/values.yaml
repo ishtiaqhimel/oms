@@ -21,6 +21,12 @@ service:
   type: ClusterIP
   port: 4000
 
+ingress:
+  annotations:
+    konghq.com/strip-path: "true"
+  className: kong
+  host: ""
+
 env:
   dbName: postgres
   dbUser: postgres
@@ -29,4 +35,6 @@ env:
 
 secret:
   dbPassword: "12345"
-  jwtSecret: randomstring
+  jwtAlgo: HS256
+  jwtSecret: randomsecret
+  jwtKey: randomkey

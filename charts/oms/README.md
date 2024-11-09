@@ -16,6 +16,13 @@ $ helm upgrade -i oms ./oms --namespace oms --create-namespace
 $ helm uninstall oms -n oms
 ```
 
+### Dependency Charts
+
+- [auth-server](../auth-server/)
+- [oms-server](../oms-server/)
+- [postgres](../postgres/)
+- [kong](https://github.com/Kong/charts)
+
 ### Configuration
 
 The following table lists the configurable parameters of the `oms` chart and their default values.
@@ -23,10 +30,7 @@ The following table lists the configurable parameters of the `oms` chart and the
 | Parameter | Description | Default |
 |---|---|---|
 | nameOverride | Overrides name template | `""` |
-| fullnameOverride | Overrides fullname template | `""` |
-| ingress.enabled | | `true` |
-| ingress.className | | `kong` |
-| ingress.annotations | | `konghq.com/strip-path: "true"` | 
+| fullnameOverride | Overrides fullname template | `""` | 
 | postgres.enabled | | `true` |
 | auth-server.enabled | | `true` |
 | auth-server.service.port | | `3000` |

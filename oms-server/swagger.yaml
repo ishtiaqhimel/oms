@@ -41,10 +41,6 @@ paths:
             responses:
                 "200":
                     $ref: '#/responses/orderListResponse'
-                "400":
-                    $ref: '#/responses/errorResponse'
-                "401":
-                    $ref: '#/responses/errorResponse'
                 "500":
                     $ref: '#/responses/errorResponse'
         post:
@@ -62,8 +58,6 @@ paths:
                     $ref: '#/responses/orderResponse'
                 "400":
                     $ref: '#/responses/errorResponse'
-                "401":
-                    $ref: '#/responses/errorResponse'
     /order/{id}:
         delete:
             description: Delete an order by id
@@ -79,10 +73,6 @@ paths:
             responses:
                 "204":
                     $ref: '#/responses/noContentResponse'
-                "400":
-                    $ref: '#/responses/errorResponse'
-                "401":
-                    $ref: '#/responses/errorResponse'
                 "404":
                     $ref: '#/responses/errorResponse'
         get:
@@ -99,10 +89,6 @@ paths:
             responses:
                 "200":
                     $ref: '#/responses/orderResponse'
-                "400":
-                    $ref: '#/responses/errorResponse'
-                "401":
-                    $ref: '#/responses/errorResponse'
                 "404":
                     $ref: '#/responses/errorResponse'
         put:
@@ -126,8 +112,6 @@ paths:
                 "200":
                     $ref: '#/responses/orderResponse'
                 "400":
-                    $ref: '#/responses/errorResponse'
-                "401":
                     $ref: '#/responses/errorResponse'
                 "404":
                     $ref: '#/responses/errorResponse'

@@ -91,6 +91,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"iss": os.Getenv("JWT_KEY"),
 		"sub": user.Username,
 		"exp": time.Now().Add(time.Hour * 24).Unix(),
 	})
@@ -102,5 +103,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Add("Token", tokenString)
+	w.Header().Add("Authorization", "Bearer "+tokenString)
 }

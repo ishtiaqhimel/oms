@@ -6,12 +6,6 @@
 nameOverride: ""
 fullnameOverride: ""
 
-ingress:
-  enabled: true
-  className: kong
-  annotations:
-    konghq.com/strip-path: "true"
-
 postgres:
   enabled: true
 
