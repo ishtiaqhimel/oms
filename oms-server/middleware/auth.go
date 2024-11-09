@@ -1,10 +1,12 @@
 package middleware
 
 import (
+	"log"
 	"net/http"
 	"os"
 
 	"github.com/golang-jwt/jwt"
+	"github.com/ishtiaqhimel/oms/oms-server/models"
 )
 
 func AuthMiddleware(next http.Handler) http.Handler {
@@ -16,15 +18,21 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		})
 		if err != nil {
 			if err == jwt.ErrSignatureInvalid {
-				http.Error(w, "Unauthorized", http.StatusUnauthorized)
+				log.Println("Unauthorized", err)
+				w.WriteHeader(http.StatusUnauthorized)
+				models.ToJSON(&models.GenericError{Message: err.Error()}, w)
 				return
 			}
-			http.Error(w, "Bad Request", http.StatusBadRequest)
+			log.Println("Bad Request", err)
+			w.WriteHeader(http.StatusBadRequest)
+			models.ToJSON(&models.GenericError{Message: err.Error()}, w)
 			return
 		}
 
 		if !token.Valid {
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			log.Println("Unauthorized", err)
+			w.WriteHeader(http.StatusUnauthorized)
+			models.ToJSON(&models.GenericError{Message: "token is not valid"}, w)
 			return
 		}
 

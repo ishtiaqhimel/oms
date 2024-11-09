@@ -51,8 +51,6 @@ paths:
                     $ref: '#/responses/errorResponse'
                 "500":
                     $ref: '#/responses/errorResponse'
-            tags:
-                - users
     /signup:
         post:
             description: SignUp a new user
@@ -71,8 +69,6 @@ paths:
                     $ref: '#/responses/errorResponse'
                 "500":
                     $ref: '#/responses/errorResponse'
-            tags:
-                - users
 produces:
     - application/json
 responses:

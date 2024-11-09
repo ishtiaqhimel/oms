@@ -1,0 +1,5 @@
+apiVersion: v2
+name: auth-server
+description: A Helm chart for deploying Auth-server
+type: application
+version: 0.1.0

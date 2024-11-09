@@ -1,0 +1,34 @@
+{{- if .Values.ingress.enabled }}
+{{- $fullName := include "oms.fullname" . }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "oms.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-auth-server
+                port:
+                  number: {{ index .Values "auth-server" "service" "port" }}
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-oms-server
+                port:
+                  number: {{ index .Values "oms-server" "service" "port" }}
+{{- end }}

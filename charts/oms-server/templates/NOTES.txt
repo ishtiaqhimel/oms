@@ -1,0 +1,4 @@
+
+To verify that OMS server has started, run:
+
+  kubectl get deployment --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "oms-server.name" . }},app.kubernetes.io/instance={{ .Release.Name }}"

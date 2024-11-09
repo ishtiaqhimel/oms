@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "auth-server.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "auth-server.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 3000
+  selector:
+    {{- include "auth-server.selectorLabels" . | nindent 4 }}

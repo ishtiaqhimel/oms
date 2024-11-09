@@ -1,0 +1,32 @@
+# Default values for auth-server.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: ishtiaq99/auth-server
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+podLabels:
+  component: auth
+
+service:
+  type: ClusterIP
+  port: 3000
+
+env:
+  dbName: postgres
+  dbUser: postgres
+  dbPort: "5432"
+  dbHost: postgres
+
+secret:
+  dbPassword: "12345"
+  jwtSecret: randomstring

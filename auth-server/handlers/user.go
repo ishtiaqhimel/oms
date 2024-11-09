@@ -12,7 +12,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// swagger:route POST /signup users signupUser
+// swagger:route POST /signup signupUser
 // SignUp a new user
 //
 // responses:
@@ -52,7 +52,7 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-// swagger:route POST /login users loginUser
+// swagger:route POST /login loginUser
 // Login an user
 //
 // responses:

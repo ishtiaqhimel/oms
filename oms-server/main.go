@@ -18,24 +18,27 @@ import (
 	mw "github.com/ishtiaqhimel/oms/oms-server/middleware"
 )
 
+const defaultPort = "4000"
+
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	r.Use(mw.AuthMiddleware)
 
-	r.Post("/api/order", handlers.CreateOrder)
-	r.Get("/api/order/{id}", handlers.GetOrder)
-	r.Put("/api/order/{id}", handlers.UpdateOrder)
-	r.Delete("/api/order/{id}", handlers.DeleteOrder)
+	r.Group(func(r chi.Router) {
+		r.Use(mw.AuthMiddleware)
 
-	// handler for documentation
-	// opts := openapi.RedocOpts{BasePath: "/auth", SpecURL: "/swagger.yaml"}
-	// sh := openapi.Redoc(opts, nil)
+		r.Post("/order", handlers.CreateOrder)
+		r.Get("/order", handlers.ListOrders)
+		r.Get("/order/{id}", handlers.GetOrder)
+		r.Put("/order/{id}", handlers.UpdateOrder)
+		r.Delete("/order/{id}", handlers.DeleteOrder)
+	})
 
-	// r.Handle("/auth/docs", sh)
-	// r.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
-
-	bindAddr := fmt.Sprintf(":%s", os.Getenv("PORT"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = defaultPort
+	}
+	bindAddr := fmt.Sprintf(":%s", port)
 	server := &http.Server{
 		Addr:         bindAddr,
 		Handler:      r,
@@ -64,6 +67,6 @@ func main() {
 }
 
 func init() {
-	initializers.LoadEnv()
+	// initializers.LoadEnv()
 	initializers.ConnectToDB()
 }

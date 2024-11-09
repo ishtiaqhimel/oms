@@ -1,0 +1,35 @@
+# Default values for oms.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+nameOverride: ""
+fullnameOverride: ""
+
+ingress:
+  enabled: true
+  className: kong
+  annotations:
+    konghq.com/strip-path: "true"
+
+postgres:
+  enabled: true
+
+auth-server:
+  enabled: true
+  service:
+    port: 3000
+  env:
+    dbHost: oms-postgres
+
+oms-server:
+  enabled: true
+  service:
+    port: 4000
+  env:
+    dbHost: oms-postgres
+
+kong:
+  enabled: true
+  ingressController:
+    installCRDs: false

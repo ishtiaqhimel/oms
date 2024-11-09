@@ -1,0 +1,155 @@
+basePath: /api
+consumes:
+    - application/json
+definitions:
+    GenericError:
+        properties:
+            message:
+                type: string
+                x-go-name: Message
+        type: object
+        x-go-package: github.com/ishtiaqhimel/oms/oms-server/models
+    Order:
+        description: |-
+            Order represents an order placed by an user
+            swagger: model
+        properties:
+            ID:
+                description: the id for the order
+                format: uint64
+                type: integer
+            ProductName:
+                description: the product name that has been ordered
+                type: string
+            Username:
+                description: the name of the user who placed the order
+                type: string
+        required:
+            - Username
+            - ProductName
+        type: object
+        x-go-package: github.com/ishtiaqhimel/oms/oms-server/models
+info:
+    description: Documentation for Order API
+    title: of Order API
+    version: 1.0.0
+paths:
+    /order:
+        get:
+            description: List all orders
+            operationId: listOrders
+            responses:
+                "200":
+                    $ref: '#/responses/orderListResponse'
+                "400":
+                    $ref: '#/responses/errorResponse'
+                "401":
+                    $ref: '#/responses/errorResponse'
+                "500":
+                    $ref: '#/responses/errorResponse'
+        post:
+            description: Create a new order
+            operationId: createOrder
+            parameters:
+                - description: Order data structure to update order.
+                  in: body
+                  name: Body
+                  required: true
+                  schema:
+                    $ref: '#/definitions/Order'
+            responses:
+                "201":
+                    $ref: '#/responses/orderResponse'
+                "400":
+                    $ref: '#/responses/errorResponse'
+                "401":
+                    $ref: '#/responses/errorResponse'
+    /order/{id}:
+        delete:
+            description: Delete an order by id
+            operationId: deleteOrder
+            parameters:
+                - description: The id of the order for which the operation relates
+                  format: int64
+                  in: path
+                  name: id
+                  required: true
+                  type: integer
+                  x-go-name: ID
+            responses:
+                "204":
+                    $ref: '#/responses/noContentResponse'
+                "400":
+                    $ref: '#/responses/errorResponse'
+                "401":
+                    $ref: '#/responses/errorResponse'
+                "404":
+                    $ref: '#/responses/errorResponse'
+        get:
+            description: Get an order by id
+            operationId: getOrder
+            parameters:
+                - description: The id of the order for which the operation relates
+                  format: int64
+                  in: path
+                  name: id
+                  required: true
+                  type: integer
+                  x-go-name: ID
+            responses:
+                "200":
+                    $ref: '#/responses/orderResponse'
+                "400":
+                    $ref: '#/responses/errorResponse'
+                "401":
+                    $ref: '#/responses/errorResponse'
+                "404":
+                    $ref: '#/responses/errorResponse'
+        put:
+            description: Update an order by id
+            operationId: updateOrder
+            parameters:
+                - description: Order data structure to update order.
+                  in: body
+                  name: Body
+                  required: true
+                  schema:
+                    $ref: '#/definitions/Order'
+                - description: The id of the order for which the operation relates
+                  format: int64
+                  in: path
+                  name: id
+                  required: true
+                  type: integer
+                  x-go-name: ID
+            responses:
+                "200":
+                    $ref: '#/responses/orderResponse'
+                "400":
+                    $ref: '#/responses/errorResponse'
+                "401":
+                    $ref: '#/responses/errorResponse'
+                "404":
+                    $ref: '#/responses/errorResponse'
+produces:
+    - application/json
+responses:
+    errorResponse:
+        description: Generic error message returned as a string
+        schema:
+            $ref: '#/definitions/GenericError'
+    noContentResponse:
+        description: No content is returned by this API endpoint
+    orderListResponse:
+        description: Data structure representing list of orders
+        schema:
+            items:
+                $ref: '#/definitions/Order'
+            type: array
+    orderResponse:
+        description: Data structure representing a single order
+        schema:
+            $ref: '#/definitions/Order'
+schemes:
+    - http
+swagger: "2.0"

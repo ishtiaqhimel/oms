@@ -1,0 +1,4 @@
+
+To verify that Postgres has started, run:
+
+  kubectl get deployment --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "postgres.name" . }},app.kubernetes.io/instance={{ .Release.Name }}"

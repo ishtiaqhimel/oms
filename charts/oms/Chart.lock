@@ -1,0 +1,15 @@
+dependencies:
+- name: postgres
+  repository: file://../postgres
+  version: 0.1.0
+- name: auth-server
+  repository: file://../auth-server
+  version: 0.1.0
+- name: oms-server
+  repository: file://../oms-server
+  version: 0.1.0
+- name: kong
+  repository: https://charts.konghq.com
+  version: 2.42.0
+digest: sha256:fa52c8f7956d004772a63aee7544e054976f0cad109f85765f63383ea4b94077
+generated: "2024-11-09T17:40:39.64204965+06:00"

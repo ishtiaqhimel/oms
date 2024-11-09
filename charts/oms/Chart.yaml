@@ -1,0 +1,23 @@
+apiVersion: v2
+name: oms
+description: A Helm chart for deploying Order Management System
+type: application
+version: 0.1.0
+dependencies:
+- name: postgres
+  repository: file://../postgres
+  condition: postgres.enabled
+  version: 0.1.0
+- name: auth-server
+  repository: file://../auth-server
+  condition: auth-server.enabled
+  version: 0.1.0
+- name: oms-server
+  repository: file://../oms-server
+  condition: oms-server.enabled
+  version: 0.1.0
+- name: kong
+  repository: "https://charts.konghq.com"
+  condition: kong.enabled
+  version: "2.42.0"
+    
