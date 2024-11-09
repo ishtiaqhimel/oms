@@ -1,5 +1,5 @@
 REGISTRY ?= ishtiaq99
-BUILD_PLATFORM ?= linux/amd64 #,linux/arm64
+BUILD_PLATFORM ?= linux/amd64,linux/arm64
 
 fmt:
 	go fmt ./...
