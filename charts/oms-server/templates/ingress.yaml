@@ -5,11 +5,11 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "oms-server.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
   annotations:
-    konghq.com/plugins: jwt-auth
+    konghq.com/plugins: {{ include "oms-server.fullname" . }}
+    {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
-  {{- end }}
+    {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:

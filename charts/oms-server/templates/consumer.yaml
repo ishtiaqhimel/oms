@@ -1,10 +1,10 @@
 apiVersion: configuration.konghq.com/v1
 kind: KongConsumer
 metadata:
-  name: jwt-auth
+  name: {{ include "oms-server.fullname" . }}
   namespace: {{ .Release.Namespace }}
   annotations:
     kubernetes.io/ingress.class: kong
-username: jwt-auth
+username: {{ include "oms-server.fullname" . }}
 credentials:
 - {{ include "oms-server.fullname" . }}

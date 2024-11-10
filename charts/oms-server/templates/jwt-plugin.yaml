@@ -1,7 +1,7 @@
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: jwt-auth
+  name: {{ include "oms-server.fullname" . }}
   namespace: {{ .Release.Namespace }}
 plugin: jwt
 config:

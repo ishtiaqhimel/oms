@@ -8,8 +8,5 @@ dependencies:
 - name: oms-server
   repository: file://../oms-server
   version: 0.1.0
-- name: kong
-  repository: https://charts.konghq.com
-  version: 2.42.0
-digest: sha256:fa52c8f7956d004772a63aee7544e054976f0cad109f85765f63383ea4b94077
-generated: "2024-11-09T17:40:39.64204965+06:00"
+digest: sha256:a627b30ae92f21d88310e509dfaf2f444d04e4bb5795190bd3ea521c08b93e9c
+generated: "2024-11-10T12:49:20.978046027+06:00"

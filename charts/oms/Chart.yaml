@@ -16,8 +16,4 @@ dependencies:
   repository: file://../oms-server
   condition: oms-server.enabled
   version: 0.1.0
-- name: kong
-  repository: "https://charts.konghq.com"
-  condition: kong.enabled
-  version: "2.42.0"
     

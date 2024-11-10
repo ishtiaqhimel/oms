@@ -38,3 +38,8 @@ secret:
   jwtAlgo: HS256
   jwtSecret: randomsecret
   jwtKey: randomkey
+
+kong:
+  enabled: true
+  ingressController:
+    installCRDs: false

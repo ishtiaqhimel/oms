@@ -16,6 +16,10 @@ $ helm upgrade -i oms-server ./oms-chart --namespace oms --create-namespace
 $ helm uninstall oms-server -n oms
 ```
 
+### Dependency Charts
+
+- [kong](https://github.com/Kong/charts)
+
 ### Configuration
 
 The following table lists the configurable parameters of the `oms-server` chart and their default values.
@@ -43,6 +47,8 @@ The following table lists the configurable parameters of the `oms-server` chart 
 | secret.jwtAlgo | `algorithm` key set in secret | `HS256` |
 | secret.jwtSecret | `secret` key set in secret | `randomsecret` |
 | secret.jwtKey | `key` key set in secret | `randomkey` |
+| kong.enabled | | `true` |
+| kong.ingressController.installCRDs | | `false` |
 
 - Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`.
 - Alternatively, a YAML file that specifies the values for the parameters can be provided using `--value` flag while installing the chart.

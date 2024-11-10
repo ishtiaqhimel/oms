@@ -22,8 +22,3 @@ oms-server:
     port: 4000
   env:
     dbHost: oms-postgres
-
-kong:
-  enabled: true
-  ingressController:
-    installCRDs: false

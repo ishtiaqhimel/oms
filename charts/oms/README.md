@@ -21,7 +21,6 @@ $ helm uninstall oms -n oms
 - [auth-server](../auth-server/)
 - [oms-server](../oms-server/)
 - [postgres](../postgres/)
-- [kong](https://github.com/Kong/charts)
 
 ### Configuration
 
@@ -38,8 +37,6 @@ The following table lists the configurable parameters of the `oms` chart and the
 | oms-server.enabled | | `true` |
 | oms-server.service.port | | `4000` |
 | oms-server.env.dbHost | | `oms-postgres` |
-| kong.enabled | | `true` |
-| kong.ingressController.installCRDs | | `false` |
 
 [**NOTE:** The naming format for `auth-server.env.dbHost` & `oms-server.env.dbHost` is `<RELEASE_NAME>-postgres`.]
 
