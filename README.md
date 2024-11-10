@@ -6,7 +6,7 @@ Welcome to the OMS (Order Management System) application. In the following secti
 
 - **Auth Server :** Users can signup or login. Users need to signup at first. Then they will get access token each new login.
 - **Order Management System Server :** Simple order CRUD application.
-- **Proxy :** Used `kong` as a public facing piece. All the traffic will be landed here. Then necessary auth termination and other stuffs like getting information from auth, adding authorization header, route check will be done here.
+- **Proxy :** Used `kong` as a public facing piece. All the traffic will be landed here. Auth termination is done here with the help of [JWT Plugin](https://docs.konghq.com/hub/kong-inc/jwt/) and also route check are done here.
 
 ## Install
 
@@ -29,23 +29,32 @@ You can try out the apis. The apis documentations can be found in `swagger.yaml`
 
 At first, you need to signup:
 ```bash
-$ curl -X POST "http://<address>:<port>/auth/signup" \
+$ curl -X POST "http://<address>/auth/signup" \
        -d '{"username": "Alice", "password": "12345"}'
 ```
 
 To generate authentication token:
 ```bash
-$ curl -X POST "http://<address>:<port>/auth/login" \
+$ curl -X POST "http://<address>/auth/login" \
        -d '{"username": "Alice", "password": "12345"}' \
        -v
 ```
 
 Here, you will get the `Bearer Token` in the headers. Copy and save the token.
 
-Now, call the order apis. Let's try list orders api:
+Now, call the order apis. Let's try create an order:
+
 ```bash
-curl -X GET "http://<address>:<port>/api/order" \
-     -H "Authorization: <bearer-token>"
+$ curl -X GET "http://<address>/api/order" \
+       -H "Authorization: <bearer-token>" \
+       -d '{"username":"Alice", "productname":"tea"}'
+```
+
+Let's try list the orders:
+
+```bash
+$ curl -X GET "http://<address>/api/order" \
+       -H "Authorization: <bearer-token>"
 ```
 
 Here, you will see the list of orders.
